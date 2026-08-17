@@ -3,16 +3,39 @@ layout: default
 title: Home
 ---
 
-<h1>{{ site.title }}</h1>
+<section class="hero" markdown="1">
 
-<h2>Post</h2>
+# Andrea Gallidabino
 
-Il sito funziona
+Docente di informatica. Sito attualmente in costruzione.
+
+In questo spazio raccolgo appunti, progetti, materiale didattico e riflessioni.
+
+</section>
+
+## Ultimi post
+
+<div class="posts">
 
 {% for post in site.posts %}
 
-### [{{ post.title }}]({{ post.url | relative_url }})
+<a
+    class="post-card"
+    href="{{ post.url | relative_url }}"
+>
 
-{{ post.date | date: "%d/%m/%Y" }}
+<h3>{{ post.title }}</h3>
+
+<div class="post-meta">
+    {{ post.date | date: "%d.%m.%Y" }}
+
+    {% if post.categories %}
+        · {{ post.categories | join: ", " }}
+    {% endif %}
+</div>
+
+</a>
 
 {% endfor %}
+
+</div>

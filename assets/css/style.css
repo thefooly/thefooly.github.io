@@ -1,0 +1,299 @@
+:root {
+    --bg: #ffffff;
+    --surface: #f6f7f9;
+    --text: #202124;
+    --muted: #6b7280;
+    --border: #e5e7eb;
+    --accent: #2563eb;
+    --accent-hover: #1d4ed8;
+    --max-width: 900px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+
+    background: var(--bg);
+    color: var(--text);
+
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Helvetica,
+        Arial,
+        sans-serif;
+
+    line-height: 1.7;
+}
+
+
+/* -------------------------
+   Layout
+------------------------- */
+
+.container {
+    width: min(100% - 40px, var(--max-width));
+    margin: 0 auto;
+}
+
+
+/* -------------------------
+   Header
+------------------------- */
+
+.site-header {
+    border-bottom: 1px solid var(--border);
+    padding: 18px 0;
+}
+
+.site-header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.site-title {
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.15rem;
+}
+
+.site-nav {
+    display: flex;
+    gap: 24px;
+}
+
+.site-nav a {
+    color: var(--muted);
+    text-decoration: none;
+}
+
+.site-nav a:hover {
+    color: var(--accent);
+}
+
+
+/* -------------------------
+   Main
+------------------------- */
+
+main {
+    padding: 70px 0;
+}
+
+
+/* -------------------------
+   Typography
+------------------------- */
+
+h1,
+h2,
+h3 {
+    line-height: 1.25;
+}
+
+h1 {
+    font-size: clamp(2.3rem, 7vw, 4rem);
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+h2 {
+    margin-top: 60px;
+    margin-bottom: 25px;
+    font-size: 1.8rem;
+}
+
+h3 {
+    margin-top: 0;
+}
+
+p {
+    margin: 0 0 1.4rem;
+}
+
+a {
+    color: var(--accent);
+}
+
+a:hover {
+    color: var(--accent-hover);
+}
+
+
+/* -------------------------
+   Hero
+------------------------- */
+
+.hero {
+    margin-bottom: 70px;
+}
+
+.hero p {
+    max-width: none;
+    font-size: 1.25rem;
+    color: var(--muted);
+}
+
+
+/* -------------------------
+   Posts
+------------------------- */
+
+.posts {
+    display: grid;
+    gap: 20px;
+}
+
+.post-card {
+    display: block;
+
+    padding: 25px;
+
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+
+    color: var(--text);
+    text-decoration: none;
+
+    transition:
+        transform 0.15s ease,
+        border-color 0.15s ease;
+}
+
+.post-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent);
+}
+
+.post-card h3 {
+    margin-bottom: 8px;
+}
+
+.post-meta {
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
+
+/* -------------------------
+   Article
+------------------------- */
+
+.article-header {
+    margin-bottom: 50px;
+}
+
+.article-header h1 {
+    font-size: clamp(2.2rem, 6vw, 3.5rem);
+}
+
+.article-content {
+    font-size: 1.05rem;
+}
+
+.article-content img {
+    max-width: 100%;
+    border-radius: 10px;
+}
+
+.article-content blockquote {
+    margin: 30px 0;
+    padding-left: 20px;
+
+    border-left: 4px solid var(--accent);
+
+    color: var(--muted);
+}
+
+code {
+    font-family: "Cascadia Code", Consolas, monospace;
+    background: var(--surface);
+    padding: 2px 6px;
+    border-radius: 5px;
+}
+
+pre {
+    overflow-x: auto;
+
+    padding: 20px;
+
+    background: #161b22;
+    color: #e6edf3;
+
+    border-radius: 10px;
+}
+
+pre code {
+    padding: 0;
+    background: none;
+    color: inherit;
+}
+
+
+/* -------------------------
+   Footer
+------------------------- */
+
+.site-footer {
+    margin-top: 50px;
+    padding: 30px 0;
+
+    border-top: 1px solid var(--border);
+
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
+
+/* -------------------------
+   Mobile
+------------------------- */
+
+@media (max-width: 600px) {
+
+    .site-header .container {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    main {
+        padding: 45px 0;
+    }
+
+    .hero {
+        margin-bottom: 50px;
+    }
+
+}
+
+
+/* -------------------------
+   Dark mode
+------------------------- */
+
+@media (prefers-color-scheme: dark) {
+
+    :root {
+        --bg: #0d1117;
+        --surface: #161b22;
+        --text: #e6edf3;
+        --muted: #8b949e;
+        --border: #30363d;
+        --accent: #58a6ff;
+        --accent-hover: #79c0ff;
+    }
+
+}
