@@ -1,3 +1,74 @@
 title: "Andrea Gallidabino"
 description: "Pagina personale"
 lang: "it"
+
+collections:
+  cv:
+    output: false
+
+defaults:
+  - scope:
+      path: "_cv/experience"
+      type: "cv"
+    values:
+      section: "experience"
+  - scope:
+      path: "_cv/education"
+      type: "cv"
+    values:
+      section: "education"
+  - scope:
+      path: "_cv/extra_experience"
+      type: "cv"
+    values:
+      section: "extra_experience"
+  - scope:
+      path: "_cv/publications"
+      type: "cv"
+    values:
+      section: "publications"
+  - scope:
+      path: "_cv/conferences"
+      type: "cv"
+    values:
+      section: "conferences"
+  - scope:
+      path: "_cv/projects"
+      type: "cv"
+    values:
+      section: "projects"
+  - scope:
+      path: "_cv/committees"
+      type: "cv"
+    values:
+      section: "committees"
+  - scope:
+      path: "_cv/tutorials"
+      type: "cv"
+    values:
+      section: "tutorials"
+  - scope:
+      path: "_cv/students"
+      type: "cv"
+    values:
+      section: "students"
+  - scope:
+      path: "_cv/awards"
+      type: "cv"
+    values:
+      section: "awards"
+  - scope:
+      path: "_cv/talks"
+      type: "cv"
+    values:
+      section: "talks"
+  - scope:
+      path: "_cv/collaborations"
+      type: "cv"
+    values:
+      section: "collaborations"
+  - scope:
+      path: "_cv/teaching"
+      type: "cv"
+    values:
+      section: "teaching"

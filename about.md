@@ -4,7 +4,7 @@ title: Chi sono
 permalink: /about/
 ---
 
-<section class="hero" markdown="1">
+<section class="main" markdown="1">
 
 # Andrea Gallidabino
 

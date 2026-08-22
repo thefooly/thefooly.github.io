@@ -15,12 +15,13 @@
     </head>
 
     <body>
-        <header class="site-header">
+        <header>
             <div class="container">
                 <a class="site-title"  href="{{ '/' | relative_url }}"> {{ site.title }} </a>
                 
                 <nav class="site-nav">
                     <a href="{{ '/' | relative_url }}"> Home </a>
+                    <a href="{{ '/curriculum/' | relative_url }}"> Curriculum </a>
                     <a href="{{ '/about/' | relative_url }}"> Chi sono </a>
                     <a href="https://github.com/thefooly" target="_blank"> GitHub </a>
                 </nav>
@@ -33,7 +34,7 @@
             </div>
         </main>
 
-        <footer class="site-footer">
+        <footer>
             <div class="container">
                 &copy; {{ "now" | date: "%Y" }} Andrea Gallidabino
             </div>
