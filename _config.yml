@@ -9,6 +9,9 @@ collections:
 exclude:
   - _slidev
 
+keep_files:
+  - slides
+
 defaults:
   - scope:
       path: "_cv/experience"

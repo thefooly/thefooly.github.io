@@ -5,7 +5,7 @@ title: Prima presentazione
 
 # Informatica
 
-La mia prima presentazione con Slidev
+Un piccolo test con slidev
 
 ---
 
@@ -25,4 +25,4 @@ La mia prima presentazione con Slidev
 print("Hello world")
 ```
 
-Ecco qui il cdocie di python
+Ecco qui il codice di python
