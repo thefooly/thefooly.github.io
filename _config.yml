@@ -6,6 +6,9 @@ collections:
   cv:
     output: false
 
+exclude:
+  - _slidev
+
 defaults:
   - scope:
       path: "_cv/experience"
