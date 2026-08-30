@@ -4,60 +4,82 @@ on:
   push:
     branches: ["main"]
 
+  # Permette di avviare manualmente il workflow dalla tab Actions.
   workflow_dispatch:
 
+# Permessi necessari per pubblicare su GitHub Pages.
 permissions:
   contents: read
   pages: write
   id-token: write
 
+# Evita deploy concorrenti.
 concurrency:
   group: "pages"
   cancel-in-progress: false
 
 jobs:
+
+  # =========================================================
+  # BUILD
+  # =========================================================
+
   build:
     runs-on: ubuntu-latest
 
     steps:
+
+      # -------------------------------------------------------
+      # Checkout repository
+      # -------------------------------------------------------
+
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
+
+      # -------------------------------------------------------
+      # GitHub Pages configuration
+      # -------------------------------------------------------
 
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v6
 
-      # -------------------------
-      # Build Jekyll
-      # -------------------------
+      # -------------------------------------------------------
+      # Jekyll
+      # -------------------------------------------------------
 
-      - name: Build with Jekyll
-        uses: actions/jekyll-build-pages@v1
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
         with:
-          source: ./
-          destination: ./_site
+          ruby-version: "3.4"
+          bundler-cache: true
 
-      # -------------------------
-      # Setup Slidev
-      # -------------------------
+      - name: Build Jekyll
+        run: |
+          bundle exec jekyll build \
+            --baseurl "${{ steps.pages.outputs.base_path }}"
+        env:
+          JEKYLL_ENV: production
+
+      # -------------------------------------------------------
+      # Slidev
+      # -------------------------------------------------------
 
       - name: Setup Node
         uses: actions/setup-node@v7
         with:
           node-version: 24
 
-      - name: Enable pnpm
-        run: |
-          corepack enable
-          corepack prepare pnpm@latest --activate
+      - name: Install pnpm
+        run: npm install --global pnpm
 
       - name: Install Slidev dependencies
         working-directory: _slidev
         run: pnpm install --frozen-lockfile
 
-      # -------------------------
-      # Build all Slidev decks
-      # -------------------------
+      # -------------------------------------------------------
+      # Build all Slidev presentations
+      # -------------------------------------------------------
 
       - name: Build Slidev presentations
         working-directory: _slidev
@@ -65,26 +87,40 @@ jobs:
           PAGES_BASE_PATH: ${{ steps.pages.outputs.base_path }}
         run: |
           for deck in decks/*; do
+
             if [ -f "$deck/slides.md" ]; then
+
               name=$(basename "$deck")
 
-              echo "Building Slidev deck: $name"
+              echo "========================================"
+              echo "Building Slidev presentation: $name"
+              echo "Source: $deck/slides.md"
+              echo "URL: ${PAGES_BASE_PATH}/slides/$name/"
+              echo "========================================"
 
               pnpm exec slidev build "$deck/slides.md" \
                 --base "${PAGES_BASE_PATH}/slides/$name/" \
-                --out "../_site/slides/$name" \
+                --out "$GITHUB_WORKSPACE/_site/slides/$name" \
+                --router-mode hash \
                 --without-notes
+
             fi
+
           done
 
-      # -------------------------
-      # Upload final site
-      # -------------------------
+      # -------------------------------------------------------
+      # Upload complete site
+      # -------------------------------------------------------
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v5
         with:
           path: ./_site
+
+
+  # =========================================================
+  # DEPLOY
+  # =========================================================
 
   deploy:
     environment:
@@ -92,9 +128,11 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
 
     runs-on: ubuntu-latest
+
     needs: build
 
     steps:
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5
